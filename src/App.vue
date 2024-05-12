@@ -10,7 +10,13 @@ const getWord = () => {
     method: 'GET'
   })
     .then((response) => response.json())
-    .then((w) => (word.value = w[0]))
+    .then((w: Array<string>) => {
+      word.value = w[0]
+      console.log(word.value) //TODO remove
+    })
+    .catch((e) => {
+      console.log(e) //TODO improve error handling
+    })
 }
 getWord()
 </script>

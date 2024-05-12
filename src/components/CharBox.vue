@@ -11,8 +11,6 @@ const stateStyle = computed(() => {
   switch (props.state) {
     case State.RIGHT:
       return 'bg-green-500'
-    case State.WRONG:
-      return 'bg-red-500'
     case State.WRONGPLACE:
       return 'bg-yellow-500'
     case State.GUESS:
@@ -24,10 +22,10 @@ const stateStyle = computed(() => {
 
 <template>
   <div
-    class="flex size-14 items-center justify-center rounded-lg border-2 p-2 text-center text-3xl text-slate-200"
+    class="flex h-14 w-full items-center justify-center rounded-lg border-2 p-2 text-center text-3xl text-slate-200"
     :class="
       isActive
-        ? ' border-2 border-slate-200 bg-gray-500 opacity-100 shadow-xl'
+        ? 'border-slate-200 bg-gray-500 opacity-100 shadow-xl'
         : ` border-transparent opacity-75 shadow-md ${stateStyle}`
     "
   >

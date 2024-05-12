@@ -8,15 +8,27 @@ const props = defineProps<{
   word: string
 }>()
 
+const wordMap = new Map<string, Map<number, State>>()
+
+const getWordMap = () => {
+  wordMap.clear()
+  for (let pos = 0; pos < props.word.length; pos++) {
+    const charPositions = wordMap.get(props.word[pos])
+    if (charPositions === undefined)
+      wordMap.set(props.word[pos], new Map<number, State>([[pos, State.GUESS]]))
+    else charPositions.set(pos, State.GUESS)
+  }
+}
+
 const validKeys = 'abcdefghijklmnopqrstuvwxyz'.split('')
 validKeys.push('Backspace', 'Delete')
 
 const stateMatrix = reactive<Char[][]>([
   [
-    { char: '', state: State.RIGHT },
     { char: '', state: State.GUESS },
-    { char: '', state: State.WRONG },
-    { char: '', state: State.WRONGPLACE },
+    { char: '', state: State.GUESS },
+    { char: '', state: State.GUESS },
+    { char: '', state: State.GUESS },
     { char: '', state: State.GUESS }
   ],
   [
@@ -51,16 +63,47 @@ const stateMatrix = reactive<Char[][]>([
 const isTypingAt = ref(0)
 const activeRow = ref(0)
 
+const checkGuess = (guess: Char[]) => {
+  getWordMap()
+  let wrongPlaceIndexes: number[] = []
+  for (let pos = 0; pos < guess.length; pos++) {
+    let guessedIndexes = wordMap.get(guess[pos].char)
+    if (guessedIndexes === undefined) guess[pos].state = State.WRONG
+    else if (guessedIndexes.get(pos) === undefined) {
+      guess[pos].state = State.WRONGPLACE
+      wrongPlaceIndexes.push(pos)
+    } else {
+      guess[pos].state = State.RIGHT
+      guessedIndexes.set(pos, State.RIGHT)
+    }
+  }
+  // check if a char is already guessed in all position
+  // and if so removes the WRONGPLACE state from same char
+  // in wrong places
+  wrongPlaceIndexes.forEach((i) => {
+    const rigthStates = wordMap.get(guess[i].char)
+    let allGuessed = true
+    rigthStates!.forEach((s) => {
+      if (s !== State.RIGHT) allGuessed = false
+    })
+    if (allGuessed) guess[i].state = State.WRONG
+  })
+}
+
 const keyboardInputController = () => {
   window.addEventListener('keydown', (e) => {
+    if (activeRow.value === 5) return
     if (e.key === 'Backspace' || e.key === 'Delete') {
-      stateMatrix[activeRow.value][isTypingAt.value - 1].char = ''
-      if (isTypingAt.value !== 0) isTypingAt.value--
-    } else if (validKeys.includes(e.key) && isTypingAt.value < props.word.length) {
+      if (isTypingAt.value !== 0) {
+        stateMatrix[activeRow.value][isTypingAt.value - 1].char = ''
+        isTypingAt.value--
+      }
+    } else if (validKeys.includes(e.key) && isTypingAt.value < 5) {
       stateMatrix[activeRow.value][isTypingAt.value].char = e.key
       isTypingAt.value++
     } else if (e.key === 'Enter') {
-      if (isTypingAt.value === props.word.length && activeRow.value < 4) {
+      if (isTypingAt.value === 5 && activeRow.value < 5) {
+        checkGuess(stateMatrix[activeRow.value])
         activeRow.value++
         isTypingAt.value = 0
       }
@@ -71,7 +114,7 @@ keyboardInputController()
 </script>
 
 <template>
-  <div class="grid grid-cols-5 grid-rows-5 place-content-center place-items-center gap-y-2">
+  <div class="grid grid-cols-5 grid-rows-5 place-content-center place-items-center gap-2">
     <WordRow
       v-for="i in 5"
       :key="i"
