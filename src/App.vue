@@ -18,7 +18,7 @@ getWord()
 <template>
   <TheHeader />
 
-  <main class="container mx-auto p-4 lg:px-72">
+  <main class="mx-auto w-full p-6 sm:w-4/6 md:w-3/6 lg:w-2/6">
     <WordBoard :word="word" />
   </main>
 </template>

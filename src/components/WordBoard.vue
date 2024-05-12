@@ -13,7 +13,7 @@ validKeys.push('Backspace', 'Delete')
 
 const stateMatrix = reactive<Char[][]>([
   [
-    { char: '‎', state: State.RIGHT }, //sets height for boxes
+    { char: '', state: State.RIGHT },
     { char: '', state: State.GUESS },
     { char: '', state: State.WRONG },
     { char: '', state: State.WRONGPLACE },
@@ -71,7 +71,7 @@ keyboardInputController()
 </script>
 
 <template>
-  <div class="grid grid-cols-5 grid-rows-5 gap-4">
+  <div class="grid grid-cols-5 grid-rows-5 place-content-center place-items-center gap-y-2">
     <WordRow
       v-for="i in 5"
       :key="i"
