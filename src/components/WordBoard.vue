@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import WordRow from './WordRow.vue'
 import type { Char } from '@/types/charState'
 import { State } from '@/types/charState'
 
 const props = defineProps<{
   word: string
+}>()
+
+const emit = defineEmits<{
+  gameOver: []
 }>()
 
 const wordMap = new Map<string, Map<number, State>>()
@@ -111,6 +115,10 @@ const keyboardInputController = () => {
   })
 }
 keyboardInputController()
+
+watch(activeRow, (currentRow) => {
+  if (currentRow === 5) emit('gameOver')
+})
 </script>
 
 <template>

@@ -2,8 +2,11 @@
 import { ref } from 'vue'
 import TheHeader from './TheHeader.vue'
 import WordBoard from './components/WordBoard.vue'
+import MatchModal from './components/MatchModal.vue'
 
 const word = ref('')
+const showModal = ref(false)
+const modalMsg = ref('')
 
 const getWord = () => {
   fetch('https://random-word-api.herokuapp.com/word?length=5&lang=it&number=1', {
@@ -19,13 +22,27 @@ const getWord = () => {
     })
 }
 getWord()
+
+const gameOver = () => {
+  showModal.value = true
+  modalMsg.value = 'Game Over'
+}
+
+const retry = () => {
+  showModal.value = false
+  getWord()
+}
 </script>
 
 <template>
   <TheHeader />
 
+  <Teleport to="body">
+    <MatchModal :show="showModal" @retry="retry">{{ modalMsg }}</MatchModal>
+  </Teleport>
+
   <main class="mx-auto w-full p-6 sm:w-4/6 md:w-3/6 lg:w-2/6">
-    <WordBoard :word="word" />
+    <WordBoard :word="word" :key="word" @game-over="gameOver" />
   </main>
 </template>
 
