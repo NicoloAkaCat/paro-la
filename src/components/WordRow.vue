@@ -4,7 +4,6 @@ import type { Char } from '@/types/charState'
 
 defineProps<{
   isActive: boolean
-  word: string
   chars: Char[]
 }>()
 </script>

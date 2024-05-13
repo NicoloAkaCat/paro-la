@@ -119,7 +119,6 @@ keyboardInputController()
       v-for="i in 5"
       :key="i"
       :is-active="activeRow === i - 1"
-      :word="word"
       :chars="stateMatrix[i - 1]"
     ></WordRow>
   </div>
