@@ -10,6 +10,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   gameOver: []
+  wordGuessed: []
 }>()
 
 const wordMap = new Map<string, Map<number, State>>()
@@ -70,6 +71,8 @@ const activeRow = ref(0)
 const checkGuess = (guess: Char[]) => {
   getWordMap()
   let wrongPlaceIndexes: number[] = []
+  let guessedWord = ''
+
   for (let pos = 0; pos < guess.length; pos++) {
     let guessedIndexes = wordMap.get(guess[pos].char)
     if (guessedIndexes === undefined) guess[pos].state = State.WRONG
@@ -79,6 +82,7 @@ const checkGuess = (guess: Char[]) => {
     } else {
       guess[pos].state = State.RIGHT
       guessedIndexes.set(pos, State.RIGHT)
+      guessedWord += guess[pos].char
     }
   }
   // check if a char is already guessed in all position
@@ -92,6 +96,8 @@ const checkGuess = (guess: Char[]) => {
     })
     if (allGuessed) guess[i].state = State.WRONG
   })
+
+  if (guessedWord === props.word) emit('wordGuessed')
 }
 
 const keyboardInputController = () => {
