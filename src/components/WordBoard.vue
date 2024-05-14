@@ -9,8 +9,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  gameOver: []
-  wordGuessed: []
+  gameOver: [wordGuessed: boolean]
 }>()
 
 const wordMap = new Map<string, Map<number, State>>()
@@ -97,7 +96,9 @@ const checkGuess = (guess: Char[]) => {
     if (allGuessed) guess[i].state = State.WRONG
   })
 
-  if (guessedWord === props.word) emit('wordGuessed')
+  if (guessedWord === props.word) {
+    emit('gameOver', true)
+  }
 }
 
 const keyboardInputController = () => {
@@ -123,7 +124,7 @@ const keyboardInputController = () => {
 keyboardInputController()
 
 watch(activeRow, (currentRow) => {
-  if (currentRow === 5) emit('gameOver')
+  if (currentRow === 5) emit('gameOver', false)
 })
 </script>
 

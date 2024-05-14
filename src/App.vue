@@ -23,14 +23,9 @@ const getWord = () => {
 }
 getWord()
 
-const gameOver = () => {
+const gameOver = (wordGuessed: boolean) => {
   showModal.value = true
-  modalMsg.value = 'Game Over'
-}
-
-const wordGuessed = () => {
-  showModal.value = true
-  modalMsg.value = 'Complimenti!'
+  wordGuessed ? (modalMsg.value = 'Complimenti!') : (modalMsg.value = 'Game Over')
 }
 
 const retry = () => {
@@ -50,7 +45,7 @@ const retry = () => {
   </Teleport>
 
   <main class="mx-auto w-full p-6 sm:w-4/6 md:w-3/6 lg:w-2/6">
-    <WordBoard :word="word" :key="word" @game-over="gameOver" @word-guessed="wordGuessed" />
+    <WordBoard :word="word" :key="word" @game-over.once="gameOver" />
   </main>
 </template>
 
