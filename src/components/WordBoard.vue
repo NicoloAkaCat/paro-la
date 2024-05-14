@@ -62,10 +62,18 @@ const stateMatrix = reactive<Char[][]>([
     { char: '', state: State.GUESS },
     { char: '', state: State.GUESS },
     { char: '', state: State.GUESS }
+  ],
+  [
+    { char: '', state: State.GUESS },
+    { char: '', state: State.GUESS },
+    { char: '', state: State.GUESS },
+    { char: '', state: State.GUESS },
+    { char: '', state: State.GUESS }
   ]
 ])
 const isTypingAt = ref(0)
 const activeRow = ref(0)
+const maxTries = 6
 
 const checkGuess = (guess: Char[]) => {
   getWordMap()
@@ -103,7 +111,7 @@ const checkGuess = (guess: Char[]) => {
 
 const keyboardInputController = () => {
   window.addEventListener('keydown', (e) => {
-    if (activeRow.value === 5) return
+    if (activeRow.value === maxTries) return
     if (e.key === 'Backspace' || e.key === 'Delete') {
       if (isTypingAt.value !== 0) {
         stateMatrix[activeRow.value][isTypingAt.value - 1].char = ''
@@ -113,7 +121,7 @@ const keyboardInputController = () => {
       stateMatrix[activeRow.value][isTypingAt.value].char = e.key
       isTypingAt.value++
     } else if (e.key === 'Enter') {
-      if (isTypingAt.value === 5 && activeRow.value < 5) {
+      if (isTypingAt.value === 5 && activeRow.value < maxTries) {
         checkGuess(stateMatrix[activeRow.value])
         activeRow.value++
         isTypingAt.value = 0
@@ -124,14 +132,17 @@ const keyboardInputController = () => {
 keyboardInputController()
 
 watch(activeRow, (currentRow) => {
-  if (currentRow === 5) emit('gameOver', false)
+  if (currentRow === maxTries) emit('gameOver', false)
 })
 </script>
 
 <template>
-  <div class="grid grid-cols-5 grid-rows-5 place-content-center place-items-center gap-2">
+  <div
+    class="grid grid-cols-5 place-content-center place-items-center gap-2"
+    :class="`grid-rows-${maxTries}`"
+  >
     <WordRow
-      v-for="i in 5"
+      v-for="i in maxTries"
       :key="i"
       :is-active="activeRow === i - 1"
       :chars="stateMatrix[i - 1]"
