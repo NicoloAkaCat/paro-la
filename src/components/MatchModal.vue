@@ -21,7 +21,7 @@ defineEmits<{
           <slot></slot>
         </h2>
         <button
-          class="rounded-lg bg-green-700 p-4 text-lg uppercase text-white shadow-lg ring-green-400 transition-all duration-150 hover:scale-110 hover:bg-green-600 focus:outline-none focus:ring-2 md:text-xl"
+          class="rounded-lg bg-green-700 p-4 text-lg uppercase text-white shadow-lg ring-green-400 transition-all duration-150 hover:scale-110 hover:bg-green-600 focus:outline-none focus-visible:ring-2 md:text-xl"
           @click="$emit('retry')"
         >
           Gioca Ancora

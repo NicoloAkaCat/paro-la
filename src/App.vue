@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import TheHeader from './TheHeader.vue'
 import WordBoard from './components/WordBoard.vue'
 import MatchModal from './components/MatchModal.vue'
+import VirtualKeyboard from './components/VirtualKeyboard.vue'
 
 const word = ref('')
 const showModal = ref(false)
@@ -46,6 +47,7 @@ const retry = () => {
 
   <main class="mx-auto w-full p-6 sm:w-4/6 md:w-3/6 lg:w-2/6">
     <WordBoard :word="word" :key="word" @game-over.once="gameOver" />
+    <VirtualKeyboard class="mt-10"></VirtualKeyboard>
   </main>
 </template>
 
