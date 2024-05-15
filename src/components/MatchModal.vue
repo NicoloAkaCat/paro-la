@@ -11,7 +11,7 @@ defineEmits<{
   <Transition name="modal">
     <div
       v-if="show"
-      class="absolute left-0 top-0 flex h-svh w-svw items-center justify-center bg-black bg-opacity-45"
+      class="absolute left-0 top-0 flex min-h-screen w-svw items-center justify-center bg-black bg-opacity-45"
     >
       <div class="w-max rounded-xl bg-gray-800 p-10 text-center shadow-lg md:p-12">
         <h1 class="mb-2 text-3xl md:mb-5 md:text-5xl">
