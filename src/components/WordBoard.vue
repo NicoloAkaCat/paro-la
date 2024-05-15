@@ -3,6 +3,7 @@ import { reactive, ref, watch } from 'vue'
 import WordRow from './WordRow.vue'
 import type { Char } from '@/types/charState'
 import { State } from '@/types/charState'
+import { validKeys } from '@/types/keys'
 
 const props = defineProps<{
   word: string
@@ -23,9 +24,6 @@ const getWordMap = () => {
     else charPositions.set(pos, State.GUESS)
   }
 }
-
-const validKeys = 'abcdefghijklmnopqrstuvwxyz'.split('')
-validKeys.push('Backspace', 'Delete')
 
 const stateMatrix = reactive<Char[][]>([
   [
