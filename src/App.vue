@@ -123,24 +123,34 @@ const checkGuess = (guess: Char[]) => {
   }
 }
 
-window.addEventListener('keydown', (e) => {
+const updateMatrix = (c: string) => {
   if (activeRow.value >= maxTries) return
-  if (e.key === 'Backspace' || e.key === 'Delete') {
+  if (c === 'Backspace' || c === 'Delete') {
     if (isTypingAt.value !== 0) {
       stateMatrix.value[activeRow.value][isTypingAt.value - 1].char = ''
       isTypingAt.value--
     }
-  } else if (validKeys.includes(e.key) && isTypingAt.value < 5) {
-    stateMatrix.value[activeRow.value][isTypingAt.value].char = e.key
+  } else if (validKeys.includes(c) && isTypingAt.value < 5) {
+    stateMatrix.value[activeRow.value][isTypingAt.value].char = c
     isTypingAt.value++
-  } else if (e.key === 'Enter') {
+  } else if (c === 'Enter') {
     if (isTypingAt.value === 5 && activeRow.value < maxTries) {
       checkGuess(stateMatrix.value[activeRow.value])
       activeRow.value++
       isTypingAt.value = 0
     }
   }
+}
+
+// input from keyboard
+window.addEventListener('keydown', (e) => {
+  updateMatrix(e.key)
 })
+
+// input from virtual keyboard
+const virtualUpdateMatrix = (c: string) => {
+  updateMatrix(c)
+}
 
 const gameOver = (wordGuessed: boolean) => {
   showModal.value = true
@@ -180,7 +190,7 @@ getWord()
       :active-row="activeRow"
       :is-typing-at="isTypingAt"
     />
-    <VirtualKeyboard class="mt-10"></VirtualKeyboard>
+    <VirtualKeyboard class="mt-10" @key-down="virtualUpdateMatrix" />
   </main>
 </template>
 
