@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, type Ref } from 'vue'
 import TheHeader from './TheHeader.vue'
 import WordBoard from './components/WordBoard.vue'
 import MatchModal from './components/MatchModal.vue'
 import VirtualKeyboard from './components/VirtualKeyboard.vue'
-import type { Char } from './types/charState'
-import { State } from './types/charState'
-import { validKeys } from './types/keys'
+import { State, type Char } from './types/charState'
+import { getAlphabet } from './types/keys'
 
 const showModal = ref(false)
 const modalMsg = ref('')
@@ -17,6 +16,8 @@ const wordMap = new Map<string, Map<number, State>>()
 const isTypingAt = ref(0)
 const activeRow = ref(0)
 const maxTries = 6
+
+const alphabet: Ref<Char[]> = ref(getAlphabet())
 
 const getStateMatrix = () => [
   [
@@ -93,17 +94,23 @@ const checkGuess = (guess: Char[]) => {
   getWordMap()
   let wrongPlaceIndexes: number[] = []
   let guessedWord = ''
+  const alphabetCharsArray = alphabet.value.map((c: Char) => c.char)
 
   for (let pos = 0; pos < guess.length; pos++) {
     let guessedIndexes = wordMap.get(guess[pos].char)
-    if (guessedIndexes === undefined) guess[pos].state = State.WRONG
-    else if (guessedIndexes.get(pos) === undefined) {
+    if (guessedIndexes === undefined) {
+      guess[pos].state = State.WRONG
+      alphabet.value[alphabetCharsArray.indexOf(guess[pos].char)].state = State.WRONG
+    } else if (guessedIndexes.get(pos) === undefined) {
       guess[pos].state = State.WRONGPLACE
       wrongPlaceIndexes.push(pos)
+      const alphabetChar = alphabet.value[alphabetCharsArray.indexOf(guess[pos].char)]
+      if (alphabetChar.state !== State.RIGHT) alphabetChar.state = State.WRONGPLACE
     } else {
       guess[pos].state = State.RIGHT
       guessedIndexes.set(pos, State.RIGHT)
       guessedWord += guess[pos].char
+      alphabet.value[alphabetCharsArray.indexOf(guess[pos].char)].state = State.RIGHT
     }
   }
   // check if a char is already guessed in all position
@@ -130,7 +137,7 @@ const updateMatrix = (c: string) => {
       stateMatrix.value[activeRow.value][isTypingAt.value - 1].char = ''
       isTypingAt.value--
     }
-  } else if (validKeys.includes(c) && isTypingAt.value < 5) {
+  } else if (alphabet.value.map((c: Char) => c.char).includes(c) && isTypingAt.value < 5) {
     stateMatrix.value[activeRow.value][isTypingAt.value].char = c
     isTypingAt.value++
   } else if (c === 'Enter') {
@@ -164,6 +171,7 @@ const retry = () => {
   activeRow.value = 0
   isTypingAt.value = 0
   stateMatrix.value = getStateMatrix()
+  alphabet.value = getAlphabet()
 }
 
 watch(activeRow, (currentRow) => {
@@ -190,7 +198,7 @@ getWord()
       :active-row="activeRow"
       :is-typing-at="isTypingAt"
     />
-    <VirtualKeyboard class="mt-10" @key-down="virtualUpdateMatrix" />
+    <VirtualKeyboard :alphabet="alphabet" class="mt-10" @key-down="virtualUpdateMatrix" />
   </main>
 </template>
 

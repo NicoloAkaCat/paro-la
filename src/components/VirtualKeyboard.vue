@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { type Char } from '@/types/charState'
 import VirtualKey from './VirtualKey.vue'
-import { validKeys } from '@/types/keys'
+
+const props = defineProps<{
+  alphabet: Char[]
+}>()
 
 defineEmits<{
   keyDown: [charKey: string]
@@ -10,15 +14,23 @@ defineEmits<{
 <template>
   <div>
     <div class="mb-1 flex justify-evenly gap-1">
-      <VirtualKey v-for="c in validKeys.slice(0, 10)" :key="c" @click="$emit('keyDown', c)">{{
-        c
-      }}</VirtualKey>
+      <VirtualKey
+        v-for="c in props.alphabet.slice(0, 10)"
+        :key="c.char"
+        :state="c.state"
+        @click="$emit('keyDown', c.char)"
+        >{{ c.char }}</VirtualKey
+      >
     </div>
 
     <div class="mb-1 flex justify-evenly gap-1">
-      <VirtualKey v-for="c in validKeys.slice(10, 19)" :key="c" @click="$emit('keyDown', c)">{{
-        c
-      }}</VirtualKey>
+      <VirtualKey
+        v-for="c in props.alphabet.slice(10, 19)"
+        :key="c.char"
+        :state="c.state"
+        @click="$emit('keyDown', c.char)"
+        >{{ c.char }}</VirtualKey
+      >
     </div>
 
     <div class="flex justify-evenly gap-1">
@@ -38,9 +50,13 @@ defineEmits<{
           />
         </svg>
       </VirtualKey>
-      <VirtualKey v-for="c in validKeys.slice(19, 26)" :key="c" @click="$emit('keyDown', c)">{{
-        c
-      }}</VirtualKey>
+      <VirtualKey
+        v-for="c in props.alphabet.slice(19, 26)"
+        :key="c.char"
+        :state="c.state"
+        @click="$emit('keyDown', c.char)"
+        >{{ c.char }}</VirtualKey
+      >
       <VirtualKey @click="$emit('keyDown', 'Backspace')"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
