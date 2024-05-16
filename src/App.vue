@@ -5,7 +5,7 @@ import WordBoard from './components/WordBoard.vue'
 import MatchModal from './components/MatchModal.vue'
 import VirtualKeyboard from './components/VirtualKeyboard.vue'
 import { State, type Char } from './types/char'
-import { getAlphabet } from './types/keys'
+import { getAlphabet, getStateMatrix } from './types/utils'
 
 const showModal = ref(false)
 const modalMsg = ref('')
@@ -18,52 +18,6 @@ const activeRow = ref(0)
 const maxTries = 6
 
 const alphabet: Ref<Char[]> = ref(getAlphabet())
-
-const getStateMatrix = () => [
-  [
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS }
-  ],
-  [
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS }
-  ],
-  [
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS }
-  ],
-  [
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS }
-  ],
-  [
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS }
-  ],
-  [
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS },
-    { char: '', state: State.GUESS }
-  ]
-]
-
 const stateMatrix = ref<Char[][]>(getStateMatrix())
 
 const getWord = () => {
