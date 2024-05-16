@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Char } from '@/types/charState'
+import { type Char } from '@/types/char'
 import VirtualKey from './VirtualKey.vue'
 
 const props = defineProps<{

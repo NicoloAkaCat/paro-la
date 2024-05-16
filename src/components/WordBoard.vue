@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import WordRow from './WordRow.vue'
-import type { Char } from '@/types/charState'
+import type { Char } from '@/types/char'
 
 defineProps<{
   activeRow: number

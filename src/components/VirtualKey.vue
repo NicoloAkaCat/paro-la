@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { State } from '@/types/charState'
+import { State } from '@/types/char'
 import { computed } from 'vue'
 
 const props = defineProps<{

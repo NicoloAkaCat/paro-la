@@ -1,4 +1,4 @@
-import { State, type Char } from './charState'
+import { State, type Char } from './char'
 
 export const getAlphabet = (): Char[] => [
   { char: 'q', state: State.GUESS },

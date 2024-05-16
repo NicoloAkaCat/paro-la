@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CharBox from './CharBox.vue'
-import type { Char } from '@/types/charState'
+import type { Char } from '@/types/char'
 
 defineProps<{
   isActive: boolean

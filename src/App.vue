@@ -4,7 +4,7 @@ import TheHeader from './TheHeader.vue'
 import WordBoard from './components/WordBoard.vue'
 import MatchModal from './components/MatchModal.vue'
 import VirtualKeyboard from './components/VirtualKeyboard.vue'
-import { State, type Char } from './types/charState'
+import { State, type Char } from './types/char'
 import { getAlphabet } from './types/keys'
 
 const showModal = ref(false)
