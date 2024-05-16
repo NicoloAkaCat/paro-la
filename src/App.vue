@@ -145,7 +145,7 @@ getWord()
     </MatchModal>
   </Teleport>
 
-  <main class="mx-auto w-full p-6 sm:w-4/6 md:w-3/6 lg:w-2/6">
+  <main class="mx-auto w-full p-6 sm:w-4/6 md:w-3/6 xl:w-2/6">
     <WordBoard
       :state-matrix="stateMatrix"
       :max-tries="maxTries"

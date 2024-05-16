@@ -22,7 +22,7 @@ const stateStyle = computed(() => {
 
 <template>
   <div
-    class="flex h-14 w-full items-center justify-center rounded-lg border-2 p-2 text-center text-3xl text-slate-200"
+    class="flex h-14 w-full items-center justify-center rounded-lg border-2 p-2 text-center text-3xl uppercase text-slate-200"
     :class="
       isActive
         ? 'border-slate-200 bg-gray-500 opacity-100 shadow-xl'
