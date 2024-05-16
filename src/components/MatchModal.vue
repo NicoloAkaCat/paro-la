@@ -8,27 +8,29 @@ defineEmits<{
 </script>
 
 <template>
-  <Transition name="modal">
-    <div
-      v-if="show"
-      class="absolute left-0 top-0 flex min-h-screen w-svw items-center justify-center bg-black bg-opacity-45"
-    >
-      <div class="w-max rounded-xl bg-gray-800 p-10 text-center shadow-lg md:p-12">
-        <h1 class="mb-2 text-3xl md:mb-5 md:text-5xl">
-          <slot name="header"></slot>
-        </h1>
-        <h2 class="mb-4 text-lg md:mb-6 md:text-2xl">
-          <slot></slot>
-        </h2>
-        <button
-          class="rounded-lg bg-green-700 p-4 text-lg uppercase text-white shadow-lg ring-green-400 transition-all duration-150 hover:scale-110 hover:bg-green-600 focus:outline-none focus-visible:ring-2 md:text-xl"
-          @click="$emit('retry')"
-        >
-          Gioca Ancora
-        </button>
+  <Teleport to="body">
+    <Transition name="modal">
+      <div
+        v-if="show"
+        class="absolute left-0 top-0 flex min-h-screen w-svw items-center justify-center bg-black bg-opacity-45"
+      >
+        <div class="w-max rounded-xl bg-gray-800 p-10 text-center shadow-lg md:p-12">
+          <h1 class="mb-2 text-3xl md:mb-5 md:text-5xl">
+            <slot name="header"></slot>
+          </h1>
+          <h2 class="mb-4 text-lg md:mb-6 md:text-2xl">
+            <slot></slot>
+          </h2>
+          <button
+            class="rounded-lg bg-green-700 p-4 text-lg uppercase text-white shadow-lg ring-green-400 transition-all duration-150 hover:scale-110 hover:bg-green-600 focus:outline-none focus:ring-4 md:text-xl"
+            @click="$emit('retry')"
+          >
+            Gioca Ancora
+          </button>
+        </div>
       </div>
-    </div>
-  </Transition>
+    </Transition>
+  </Teleport>
 </template>
 
 <style scoped>
