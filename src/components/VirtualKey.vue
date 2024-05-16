@@ -9,11 +9,11 @@ const props = defineProps<{
 const stateStyle = computed(() => {
   switch (props.state) {
     case State.RIGHT:
-      return 'bg-green-500'
+      return 'bg-green-500/75'
     case State.WRONGPLACE:
-      return 'bg-yellow-500'
+      return 'bg-yellow-500/75'
     case State.WRONG:
-      return 'bg-gray-800'
+      return 'bg-gray-800/75'
     case State.GUESS:
     default:
       return 'bg-gray-700'
