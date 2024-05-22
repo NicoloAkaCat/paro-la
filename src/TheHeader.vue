@@ -4,6 +4,9 @@ import MenuIcon from '@/icons/MenuIcon.vue'
 import CloseIcon from '@/icons/CloseIcon.vue'
 import HelpIcon from '@/icons/HelpIcon.vue'
 import NavList from '@/components/NavList.vue'
+import GithubIcon from '@/icons/GithubIcon.vue'
+import NavItem from '@/components/NavItem.vue'
+import CoffeIcon from '@/icons/CoffeeIcon.vue'
 
 const showNav = ref(false)
 </script>
@@ -31,7 +34,10 @@ const showNav = ref(false)
       </div>
 
       <Transition name="nav">
-        <NavList v-show="showNav" />
+        <NavList v-show="showNav">
+          <NavItem href="#"><CoffeIcon />Offrimi un caffe!</NavItem>
+          <NavItem href="#"><GithubIcon />GitHub</NavItem></NavList
+        >
       </Transition>
     </div>
   </header>
