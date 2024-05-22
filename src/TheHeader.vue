@@ -18,7 +18,7 @@ const showNav = ref(false)
   >
     <div class="container relative mx-auto">
       <div class="flex items-center px-6">
-        <button type="button">
+        <button type="button" class="ring-slate-200 focus:outline-none focus-visible:ring-2">
           <HelpIcon label="Regole" />
         </button>
 
@@ -26,7 +26,11 @@ const showNav = ref(false)
           Paro - La
         </h1>
 
-        <button type="button" @click="showNav = !showNav">
+        <button
+          type="button"
+          @click="showNav = !showNav"
+          class="ring-slate-200 focus:outline-none focus-visible:ring-2"
+        >
           <Transition name="menu" mode="out-in">
             <MenuIcon v-if="!showNav" label="Apri Menu" />
             <CloseIcon v-else label="Chiudi Menu" />
