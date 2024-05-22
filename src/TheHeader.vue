@@ -8,18 +8,22 @@ import GithubIcon from '@/icons/GithubIcon.vue'
 import NavItem from '@/components/NavItem.vue'
 import CoffeIcon from '@/icons/CoffeeIcon.vue'
 import MailIcon from '@/icons/MailIcon.vue'
+import HelpModal from './components/HelpModal.vue'
 
 const showNav = ref(false)
+const showHelpModal = ref(false)
 </script>
 
 <template>
+  <HelpModal :show="showHelpModal"></HelpModal>
+
   <header
     class="w-full bg-gray-800 py-5 text-xl shadow-lg sm:px-12 md:px-40 md:text-2xl lg:px-60 xl:px-96"
   >
     <div class="container relative mx-auto">
       <div class="flex items-center px-6">
         <button type="button" class="ring-slate-200 focus:outline-none focus-visible:ring-2">
-          <HelpIcon label="Regole" />
+          <HelpIcon label="Regole" @click="showHelpModal = !showHelpModal" />
         </button>
 
         <h1 class="flex-1 text-center text-2xl font-extrabold md:text-3xl lg:text-4xl">

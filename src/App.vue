@@ -140,7 +140,7 @@ getWord()
 
   <MatchModal :show="showModal" @retry="retry">
     <template #header>{{ modalMsg }}</template>
-    La parola era <em>{{ word }}</em>
+    <template #word>{{ word }}</template>
   </MatchModal>
 
   <main class="mx-auto w-full p-6 sm:w-4/6 md:w-3/6 xl:w-2/6">
