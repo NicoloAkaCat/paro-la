@@ -30,8 +30,22 @@ const showHelpModal = ref(false)
           <HelpIcon label="Regole" />
         </button>
 
-        <h1 class="flex-1 text-center text-2xl font-extrabold md:text-3xl lg:text-4xl">
-          Paro - La
+        <h1 class="title flex-1 text-center text-2xl font-extrabold md:text-3xl lg:text-4xl">
+          Paro - L<span class="relative"
+            >a
+            <div
+              aria-hidden="true"
+              class="absolute -right-4 top-0 h-2 w-3 -rotate-45 bg-white"
+            ></div>
+            <div
+              aria-hidden="true"
+              class="absolute -top-2 right-0 h-2 w-3 -rotate-90 bg-green-500"
+            ></div>
+            <div
+              aria-hidden="true"
+              class="absolute -right-6 top-4 h-2 w-3 -rotate-180 bg-red-500"
+            ></div>
+          </span>
         </h1>
 
         <button
