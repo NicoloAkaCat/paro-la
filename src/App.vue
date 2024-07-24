@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, watch, type Ref } from 'vue'
-import TheHeader from './TheHeader.vue'
+import TheHeader from './layouts/TheHeader.vue'
 import WordBoard from './components/WordBoard.vue'
-import MatchModal from './components/MatchModal.vue'
+import MatchModal from './components/modals/MatchModal.vue'
 import VirtualKeyboard from './components/VirtualKeyboard.vue'
 import { State, type Char } from './types/char'
 import { getAlphabet, getStateMatrix } from './types/utils'

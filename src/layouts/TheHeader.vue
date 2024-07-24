@@ -8,7 +8,7 @@ import GithubIcon from '@/icons/GithubIcon.vue'
 import NavItem from '@/components/NavItem.vue'
 import CoffeIcon from '@/icons/CoffeeIcon.vue'
 import MailIcon from '@/icons/MailIcon.vue'
-import HelpModal from './components/HelpModal.vue'
+import HelpModal from '@/components/modals/HelpModal.vue'
 
 const showNav = ref(false)
 const showHelpModal = ref(false)
@@ -44,14 +44,14 @@ const showHelpModal = ref(false)
 
       <Transition name="nav">
         <NavList v-show="showNav">
-          <NavItem href="https://www.buymeacoffee.com/nicoloakacat"
-            ><CoffeIcon />Offrimi un caffe!</NavItem
-          >
-          <NavItem href="https://github.com/NicoloAkaCat/paro-la"
-            ><GithubIcon />Source Code</NavItem
-          >
-          <NavItem href="https://linktr.ee/nicoloakacat"><MailIcon />Contatti</NavItem></NavList
-        >
+          <NavItem href="https://www.buymeacoffee.com/nicoloakacat">
+            <CoffeIcon />Offrimi un caffe!
+          </NavItem>
+          <NavItem href="https://github.com/NicoloAkaCat/paro-la">
+            <GithubIcon />Source Code
+          </NavItem>
+          <NavItem href="https://linktr.ee/nicoloakacat"> <MailIcon />Contatti </NavItem>
+        </NavList>
       </Transition>
     </div>
   </header>

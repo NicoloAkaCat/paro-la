@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Modal from '@/components/ModalComponent.vue'
+import Modal from '@/components/modals/ModalComponent.vue'
 
 defineProps<{
   show: boolean
