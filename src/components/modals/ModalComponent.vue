@@ -2,6 +2,9 @@
 defineProps<{
   show: boolean
 }>()
+defineEmits<{
+  closed: []
+}>()
 </script>
 
 <template>
@@ -10,6 +13,7 @@ defineProps<{
       <div
         v-if="show"
         class="absolute left-0 top-0 flex min-h-screen w-svw items-center justify-center bg-black bg-opacity-45"
+        @click="$emit('closed')"
       >
         <div class="w-max rounded-xl bg-gray-800 p-10 text-center shadow-lg md:p-12">
           <slot></slot>

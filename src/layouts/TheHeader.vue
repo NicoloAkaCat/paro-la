@@ -15,7 +15,7 @@ const showHelpModal = ref(false)
 </script>
 
 <template>
-  <HelpModal :show="showHelpModal"></HelpModal>
+  <HelpModal v-model:show="showHelpModal" />
 
   <header
     class="w-full bg-gray-800 py-5 text-xl shadow-lg sm:px-12 md:px-40 md:text-2xl lg:px-60 xl:px-96"

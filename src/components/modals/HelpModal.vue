@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import Modal from '@/components/modals/ModalComponent.vue'
 
-defineProps<{
-  show: boolean
-}>()
+const show = defineModel('show', { required: true, type: Boolean })
 </script>
 
 <template>
-  <Modal :show="show"></Modal>
+  <Modal :show="show" @closed="show = false"></Modal>
 </template>
