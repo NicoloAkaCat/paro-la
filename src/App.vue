@@ -8,6 +8,7 @@ import { State, type Char } from './types/char'
 import { getAlphabet, getStateMatrix } from './types/utils'
 
 const showModal = ref(false)
+const showModalError = ref(false)
 const modalMsg = ref('')
 
 const word = ref('')
@@ -30,7 +31,9 @@ const getWord = () => {
       console.log(word.value) //TODO remove
     })
     .catch((e) => {
-      console.log(e) //TODO improve error handling
+      showModalError.value = true
+      modalMsg.value = 'Si è veriticato un errore'
+      console.error(e)
     })
 }
 
@@ -140,7 +143,13 @@ getWord()
 
   <MatchModal :show="showModal" @retry="retry">
     <template #header>{{ modalMsg }}</template>
-    <template #word>{{ word }}</template>
+    <template #word
+      >la parola era <em>{{ word }}</em>
+    </template>
+  </MatchModal>
+
+  <MatchModal :show="showModalError" @retry="retry">
+    <template #header>{{ modalMsg }}</template>
   </MatchModal>
 
   <main class="mx-auto w-full p-6 sm:w-4/6 md:w-3/6 xl:w-2/6">
@@ -153,5 +162,3 @@ getWord()
     <VirtualKeyboard :alphabet="alphabet" class="mt-10" @key-down="virtualUpdateMatrix" />
   </main>
 </template>
-
-<style scoped></style>
