@@ -22,8 +22,12 @@ const showHelpModal = ref(false)
   >
     <div class="container relative mx-auto">
       <div class="flex items-center px-6">
-        <button type="button" class="ring-slate-200 focus:outline-none focus-visible:ring-2">
-          <HelpIcon label="Regole" @click="showHelpModal = !showHelpModal" />
+        <button
+          type="button"
+          class="ring-slate-200 focus:outline-none focus-visible:ring-2"
+          @click="showHelpModal = !showHelpModal"
+        >
+          <HelpIcon label="Regole" />
         </button>
 
         <h1 class="flex-1 text-center text-2xl font-extrabold md:text-3xl lg:text-4xl">
