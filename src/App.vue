@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, type Ref } from 'vue'
+import { onBeforeMount, ref, watch, type Ref } from 'vue'
 import TheHeader from './layouts/TheHeader.vue'
 import WordBoard from './components/WordBoard.vue'
 import MatchModal from './components/modals/MatchModal.vue'
@@ -21,20 +21,22 @@ const maxTries = 6
 const alphabet: Ref<Char[]> = ref(getAlphabet())
 const stateMatrix = ref<Char[][]>(getStateMatrix())
 
-const getWord = () => {
-  fetch('https://random-word-api.herokuapp.com/word?length=5&lang=it&number=1', {
-    method: 'GET'
-  })
-    .then((response) => response.json())
-    .then((w: Array<string>) => {
-      word.value = w[0]
-      console.log(word.value) //TODO remove
-    })
-    .catch((e) => {
-      showModalError.value = true
-      modalMsg.value = 'Si è veriticato un errore'
-      console.error(e)
-    })
+const getWord = async () => {
+  try {
+    const res = await fetch(
+      'https://random-word-api.herokuapp.com/word?length=5&lang=it&number=1',
+      {
+        method: 'GET'
+      }
+    )
+    const words = await res.json()
+    word.value = words[0]
+    console.log(word.value) //TODO remove
+  } catch (e) {
+    showModalError.value = true
+    modalMsg.value = 'Si è veriticato un errore'
+    console.error(e)
+  }
 }
 
 const getWordMap = () => {
@@ -122,9 +124,9 @@ const gameOver = (wordGuessed: boolean) => {
   wordGuessed ? (modalMsg.value = 'Complimenti!') : (modalMsg.value = 'Game Over')
 }
 
-const retry = () => {
+const retry = async () => {
   showModal.value = false
-  getWord()
+  await getWord()
   activeRow.value = 0
   isTypingAt.value = 0
   stateMatrix.value = getStateMatrix()
@@ -135,7 +137,7 @@ watch(activeRow, (currentRow) => {
   if (currentRow === maxTries) gameOver(false)
 })
 
-getWord()
+onBeforeMount(() => getWord())
 </script>
 
 <template>
