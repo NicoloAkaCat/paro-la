@@ -1,7 +1,15 @@
 <script setup lang="ts">
-defineProps<{
-  show: boolean
-}>()
+import CloseIcon from '@/icons/CloseIcon.vue'
+
+withDefaults(
+  defineProps<{
+    show: boolean
+    withCloseIcon?: boolean
+  }>(),
+  {
+    withCloseIcon: false
+  }
+)
 defineEmits<{
   closed: []
 }>()
@@ -16,8 +24,11 @@ defineEmits<{
         @click="$emit('closed')"
       >
         <div
-          class="m-10 w-full rounded-xl bg-gray-800 p-10 text-center shadow-lg md:w-6/12 md:p-12 lg:w-2/6"
+          class="relative m-10 w-full rounded-xl bg-gray-800 p-10 text-center shadow-lg md:w-6/12 md:p-12 lg:w-2/6"
         >
+          <button v-if="withCloseIcon" type="button" class="absolute right-4 top-4 cursor-pointer">
+            <CloseIcon :label="'Chiudi'" />
+          </button>
           <slot></slot>
         </div>
       </div>
