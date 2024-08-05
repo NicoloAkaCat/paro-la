@@ -31,7 +31,6 @@ const getWord = async () => {
     )
     const words = await res.json()
     word.value = words[0]
-    console.log(word.value) //TODO remove
   } catch (e) {
     showModalError.value = true
     modalMsg.value = 'Si è veriticato un errore'
