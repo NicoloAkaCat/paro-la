@@ -12,6 +12,10 @@ import HelpModal from '@/components/modals/HelpModal.vue'
 
 const showNav = ref(false)
 const showHelpModal = ref(false)
+
+window.addEventListener('click', () => {
+  if (showNav.value) showNav.value = false
+})
 </script>
 
 <template>
@@ -50,7 +54,7 @@ const showHelpModal = ref(false)
 
         <button
           type="button"
-          @click="showNav = !showNav"
+          @click.stop="showNav = !showNav"
           class="ring-slate-200 focus:outline-none focus-visible:ring-2"
         >
           <Transition name="menu" mode="out-in">
