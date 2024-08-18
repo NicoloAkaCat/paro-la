@@ -1,6 +1,11 @@
 {
   "name": "parola",
-  "version": "0.0.0",
+  "description": "An italian Wordle clone",
+  "version": "1.0.0",
+  "author": {
+    "name": "Nicolò Catania",
+    "email": "cat.is.developing@gmail.com"
+  },
   "private": true,
   "type": "module",
   "scripts": {
