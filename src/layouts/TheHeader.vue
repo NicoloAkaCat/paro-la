@@ -54,8 +54,8 @@ window.addEventListener('click', () => {
 
         <button
           type="button"
-          @click.stop="showNav = !showNav"
           class="ring-slate-200 focus:outline-none focus-visible:ring-2"
+          @click.stop="showNav = !showNav"
         >
           <Transition name="menu" mode="out-in">
             <MenuIcon v-if="!showNav" label="Apri Menu" />

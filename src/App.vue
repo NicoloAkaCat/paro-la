@@ -50,12 +50,12 @@ const getWordMap = () => {
 
 const checkGuess = (guess: Char[]) => {
   getWordMap()
-  let wrongPlaceIndexes: number[] = []
+  const wrongPlaceIndexes: number[] = []
   let guessedWord = ''
   const alphabetCharsArray = alphabet.value.map((c: Char) => c.char)
 
   for (let pos = 0; pos < guess.length; pos++) {
-    let guessedIndexes = wordMap.get(guess[pos].char)
+    const guessedIndexes = wordMap.get(guess[pos].char)
     if (guessedIndexes === undefined) {
       guess[pos].state = State.WRONG
       alphabet.value[alphabetCharsArray.indexOf(guess[pos].char)].state = State.WRONG
@@ -120,7 +120,7 @@ const virtualUpdateMatrix = (c: string) => {
 const gameOver = (wordGuessed: boolean) => {
   showModal.value = true
   activeRow.value = maxTries + 1
-  wordGuessed ? (modalMsg.value = 'Complimenti!') : (modalMsg.value = 'Game Over')
+  modalMsg.value = wordGuessed ? 'Complimenti!' : 'Game Over'
 }
 
 const retry = async () => {

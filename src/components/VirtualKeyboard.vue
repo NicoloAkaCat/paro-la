@@ -31,8 +31,9 @@ defineEmits<{
         :key="c.char"
         :state="c.state"
         @click="$emit('keyDown', c.char)"
-        >{{ c.char }}</VirtualKey
       >
+        {{ c.char }}
+      </VirtualKey>
     </div>
 
     <div class="flex justify-evenly gap-1">
@@ -42,11 +43,12 @@ defineEmits<{
         :key="c.char"
         :state="c.state"
         @click="$emit('keyDown', c.char)"
-        >{{ c.char }}</VirtualKey
       >
-      <VirtualKey @click="$emit('keyDown', 'Backspace')"
-        ><BackspaceIcon label="Cancella"
-      /></VirtualKey>
+        {{ c.char }}
+      </VirtualKey>
+      <VirtualKey @click="$emit('keyDown', 'Backspace')">
+        <BackspaceIcon label="Cancella" />
+      </VirtualKey>
     </div>
   </div>
 </template>
