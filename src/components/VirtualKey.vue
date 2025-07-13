@@ -25,7 +25,7 @@ const stateStyle = computed(() => {
   <button
     type="button"
     :class="stateStyle"
-    class="flex flex-1 items-center justify-center rounded-md p-1 text-xl uppercase ring-slate-200 hover:ring-2 focus:outline-none focus-visible:ring-2 md:text-2xl"
+    class="flex flex-1 items-center justify-center rounded-md p-1 text-xl uppercase ring-slate-200 hover:ring-2 focus:outline-hidden focus-visible:ring-2 md:text-2xl"
   >
     <slot></slot>
   </button>

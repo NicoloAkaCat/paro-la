@@ -28,7 +28,7 @@ window.addEventListener('click', () => {
       <div class="flex items-center px-6">
         <button
           type="button"
-          class="ring-slate-200 focus:outline-none focus-visible:ring-2"
+          class="ring-slate-200 focus:outline-hidden focus-visible:ring-2"
           @click="showHelpModal = !showHelpModal"
         >
           <HelpIcon label="Regole" />
@@ -54,7 +54,7 @@ window.addEventListener('click', () => {
 
         <button
           type="button"
-          class="ring-slate-200 focus:outline-none focus-visible:ring-2"
+          class="ring-slate-200 focus:outline-hidden focus-visible:ring-2"
           @click.stop="showNav = !showNav"
         >
           <Transition name="menu" mode="out-in">

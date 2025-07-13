@@ -20,13 +20,13 @@ defineEmits<{
     <Transition name="modal">
       <div
         v-if="show"
-        class="absolute left-0 top-0 z-50 flex min-h-screen w-svw items-center justify-center bg-black bg-opacity-45"
+        class="absolute top-0 left-0 z-50 flex h-svh w-svw items-center justify-center bg-black/45"
         @click="$emit('closed')"
       >
         <div
           class="relative m-10 w-full rounded-xl bg-gray-800 p-10 text-center shadow-lg md:w-6/12 md:p-12 lg:w-2/6"
         >
-          <button v-if="withCloseIcon" type="button" class="absolute right-4 top-4 cursor-pointer">
+          <button v-if="withCloseIcon" type="button" class="absolute top-4 right-4 cursor-pointer">
             <CloseIcon :label="'Chiudi'" />
           </button>
           <slot></slot>
